@@ -129,5 +129,5 @@ macro_rules! eprint_flush {
 macro_rules! input {
     () => ($crate::read_line());
     ($($arg:tt)*) =>
-        (print!($($arg)*);$crate::flush();$crate::read_line());
+        ({print!($($arg)*);$crate::flush();$crate::read_line()});
 }
