@@ -3,4 +3,5 @@ name = "prompted"
 version = "0.1.0"
 authors = ["Bart Massey <bart@cs.pdx.edu>"]
 
-[dependencies]
+[dev-dependencies]
+rand = "0.3.0"
