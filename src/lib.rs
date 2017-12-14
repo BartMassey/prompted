@@ -39,8 +39,9 @@ pub fn eflush() {
 /// # Panics
 ///
 /// Panics if reading from `io::stdin` fails.
-pub fn read_line(buf: &mut String) {
-    match stdin().read_line(buf) {
+pub fn read_line() -> String {
+    let mut buf = String::new();
+    match stdin().read_line(&mut buf) {
         Err(e) => panic!("Failed to read stdin: {}", e),
         _ => {
             match buf.pop() {
@@ -51,7 +52,8 @@ pub fn read_line(buf: &mut String) {
                     }
             }
         }
-    }
+    };
+    buf
 }
 
 /// Same functionality as `print!()` except that `stdout()`
@@ -112,7 +114,7 @@ macro_rules! eprint_flush {
 /// # pub fn main() {
 /// let mut buf = String::new();
 /// let m = 10;
-/// input!(&mut buf, "Pick a number between 1 and {}: ", m);
+/// input!("Pick a number between 1 and {}: ", m);
 /// match buf.parse::<isize>() {
 ///     Ok(n) => if n >=1 && n <= m {
 ///         println!("Thank you for choosing {}", n)
@@ -125,7 +127,7 @@ macro_rules! eprint_flush {
 /// ```
 #[macro_export]
 macro_rules! input {
-    ($buf:expr) => ($crate::read_line($buf));
-    ($buf:expr,$($arg:tt)*) =>
-        (print!($($arg)*);$crate::flush();$crate::read_line($buf));
+    () => ($crate::read_line());
+    ($($arg:tt)*) =>
+        (print!($($arg)*);$crate::flush();$crate::read_line());
 }
