@@ -1,0 +1,131 @@
+//! Prompting macros.
+//!
+//! These are eventually intended to go into the standard
+//! library macros. At that point, parts of them will need
+//! to be reimplented for efficiency and compatibility.
+
+use std::io::{stdin, stdout, stderr, Write};
+
+/// Flush standard output. Intended primarily for use by
+/// macros.
+///
+/// # Panics
+///
+/// Panics if writing to `io::stdout` fails.
+pub fn flush() {
+    match stdout().flush() {
+        Err(e) => panic!("Failed to flush stdout: {}", e),
+        _ => ()
+    }
+}
+
+/// Flush standard error. Intended primarily for use by
+/// macros.
+///
+/// # Panics
+///
+/// Panics if writing to `io::stderr` fails.
+pub fn eflush() {
+    match stderr().flush() {
+        Err(e) => panic!("Failed to flush stderr: {}", e),
+        _ => ()
+    }
+}
+
+/// Read a line from standard input. Removes a trailing
+/// newline if present. Intended primarily for use by
+/// macros.
+///
+/// # Panics
+///
+/// Panics if reading from `io::stdin` fails.
+pub fn read_line(buf: &mut String) {
+    match stdin().read_line(buf) {
+        Err(e) => panic!("Failed to read stdin: {}", e),
+        _ => {
+            match buf.pop() {
+                None => (),
+                Some(c) =>
+                    if c != '\n' {
+                        buf.push(c)
+                    }
+            }
+        }
+    }
+}
+
+/// Same functionality as `print!()` except that `stdout()`
+/// is flushed at the end.
+///
+/// As with `print!()`, the multi-argument form of this
+/// macro supports the [`format!`] syntax for building a
+/// string. With no arguments, only the flush is performed.
+///
+/// # Panics
+///
+/// Panics if writing to `io::stdout` fails.
+///
+/// # Examples
+///
+/// ```
+/// # #[macro_use]
+/// # extern crate prompted;
+/// # pub fn main() {
+/// print_flush!();
+/// print_flush!("Pick a number between 1 and {}: ", 10);
+/// # }
+/// ```
+#[macro_export]
+macro_rules! print_flush {
+    () => ($crate::flush());
+    ($($arg:tt)*) => (print!($($arg)*);$crate::flush());
+}
+
+/// Same functionality as `print_flush!()` except using `stderr()`
+/// instead of `stdout()`.
+///
+/// # Examples
+///
+/// ```
+/// # #[macro_use]
+/// # extern crate prompted;
+/// # pub fn main() {
+/// eprint_flush!();
+/// eprint_flush!("Pick a number between 1 and {}: ", 10);
+/// # }
+/// ```
+#[macro_export]
+macro_rules! eprint_flush {
+    () => ($crate::eflush());
+    ($($arg:tt)*) => (eprint!($($arg)*);$crate::eflush());
+}
+
+/// If a prompt is present, print it on `stdout()` and then
+/// flush. Then read a line from `stdin()` and return it
+/// after removing the line ending.
+///
+/// # Examples
+///
+/// ```
+/// # #[macro_use]
+/// # extern crate prompted;
+/// # pub fn main() {
+/// let mut buf = String::new();
+/// let m = 10;
+/// input!(&mut buf, "Pick a number between 1 and {}: ", m);
+/// match buf.parse::<isize>() {
+///     Ok(n) => if n >=1 && n <= m {
+///         println!("Thank you for choosing {}", n)
+///     } else {
+///         println!("You failed arithmetic with {}", n)
+///     },
+///     Err(e) => println!("Not even a number. {}?", e)
+/// }
+/// # }
+/// ```
+#[macro_export]
+macro_rules! input {
+    ($buf:expr) => ($crate::read_line($buf));
+    ($buf:expr,$($arg:tt)*) =>
+        (print!($($arg)*);$crate::flush();$crate::read_line($buf));
+}
