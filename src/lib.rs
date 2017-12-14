@@ -85,7 +85,7 @@ pub fn read_line() -> String {
 #[macro_export]
 macro_rules! print_flush {
     () => ($crate::flush());
-    ($($arg:tt)*) => (print!($($arg)*);$crate::flush());
+    ($($arg:tt)*) => ({print!($($arg)*);$crate::flush()});
 }
 
 /// Same functionality as `print_flush!()` except using `stderr()`
@@ -104,7 +104,7 @@ macro_rules! print_flush {
 #[macro_export]
 macro_rules! eprint_flush {
     () => ($crate::eflush());
-    ($($arg:tt)*) => (eprint!($($arg)*);$crate::eflush());
+    ($($arg:tt)*) => ({eprint!($($arg)*);$crate::eflush()});
 }
 
 /// If a prompt is present, print it on `stdout()` and then
