@@ -1,3 +1,8 @@
+// Copyright © 2017 Bart Massey
+// [This program is licensed under the "MIT License"]
+// Please see the file LICENSE in the source
+// distribution of this software for license terms.
+
 //! Prompting macros.
 //!
 //! These are eventually intended to go into the standard
