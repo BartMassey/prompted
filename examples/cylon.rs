@@ -6,8 +6,7 @@
 //! ASCII-art "Cylon" display.
 
 //! This is something we used to write in the 1980s to run
-//! on our glass TTYs. It is a reasonable demo of some of
-//! the package features.
+//! on our glass TTYs.
 
 #[macro_use]
 extern crate prompted;
