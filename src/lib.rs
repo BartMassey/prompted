@@ -78,17 +78,17 @@ pub fn read_line() -> String {
 /// # #[macro_use]
 /// # extern crate prompted;
 /// # pub fn main() {
-/// print_flush!();
-/// print_flush!("Pick a number between 1 and {}: ", 10);
+/// prompt!();
+/// prompt!("Pick a number between 1 and {}: ", 10);
 /// # }
 /// ```
 #[macro_export]
-macro_rules! print_flush {
+macro_rules! prompt {
     () => ($crate::flush());
     ($($arg:tt)*) => ({print!($($arg)*);$crate::flush()});
 }
 
-/// Same functionality as `print_flush!()` except using `stderr()`
+/// Same functionality as `prompt!()` except using `stderr()`
 /// instead of `stdout()`.
 ///
 /// # Examples
@@ -97,19 +97,19 @@ macro_rules! print_flush {
 /// # #[macro_use]
 /// # extern crate prompted;
 /// # pub fn main() {
-/// eprint_flush!();
-/// eprint_flush!("Pick a number between 1 and {}: ", 10);
+/// eprompt!();
+/// eprompt!("Pick a number between 1 and {}: ", 10);
 /// # }
 /// ```
 #[macro_export]
-macro_rules! eprint_flush {
+macro_rules! eprompt {
     () => ($crate::eflush());
     ($($arg:tt)*) => ({eprint!($($arg)*);$crate::eflush()});
 }
 
-/// If a prompt is present, print it on `stdout()` and then
-/// flush. Then read a line from `stdin()` and return it
-/// after removing the line ending.
+/// If a `[format!]` describing a prompt is present, print it
+/// on `stdout()` and then flush. Then read a line from
+/// `stdin()` and return it after removing the line ending.
 ///
 /// # Examples
 ///

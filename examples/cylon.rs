@@ -29,7 +29,7 @@ pub fn main() {
         };
         posn = (posn as isize + dirn) as usize;
         chars[posn] = b'*';
-        print_flush!("{}\r", str::from_utf8(&chars).unwrap());
+        prompt!("{}\r", str::from_utf8(&chars).unwrap());
         sleep(Duration::from_millis(100));
     }
 }

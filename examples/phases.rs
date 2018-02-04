@@ -37,7 +37,7 @@ pub fn main() {
             print!(" ")
         }
         let message = format!("{}: {}", n, name);
-        print_flush!("\r{}", message);
+        prompt!("\r{}", message);
         f();
         last_len = message.len();
         print!("\r")
