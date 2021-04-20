@@ -18,9 +18,8 @@ use std::io::{stdin, stdout, stderr, Write};
 ///
 /// Panics if writing to `io::stdout` fails.
 pub fn flush() {
-    match stdout().flush() {
-        Err(e) => panic!("Failed to flush stdout: {}", e),
-        _ => ()
+    if let Err(e) = stdout().flush() {
+        panic!("Failed to flush stdout: {}", e);
     }
 }
 
@@ -31,9 +30,8 @@ pub fn flush() {
 ///
 /// Panics if writing to `io::stderr` fails.
 pub fn eflush() {
-    match stderr().flush() {
-        Err(e) => panic!("Failed to flush stderr: {}", e),
-        _ => ()
+    if let Err(e) = stderr().flush() {
+        panic!("Failed to flush stderr: {}", e);
     }
 }
 
