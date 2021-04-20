@@ -18,7 +18,7 @@ use std::time::Duration;
 const WIDTH: usize = 7;
 
 pub fn main() {
-    let mut chars = [b' ';WIDTH];
+    let mut chars = [b' '; WIDTH];
     chars[0] = b'*';
     let mut posn = 0;
     let mut dirn = -1isize;

@@ -9,7 +9,7 @@
 //! library macros. At that point, parts of them will need
 //! to be reimplented for efficiency and compatibility.
 
-use std::io::{stdin, stdout, stderr, Write};
+use std::io::{stderr, stdin, stdout, Write};
 
 /// Flush standard output. Intended primarily for use by
 /// macros.
@@ -46,15 +46,14 @@ pub fn read_line() -> String {
     let mut buf = String::new();
     match stdin().read_line(&mut buf) {
         Err(e) => panic!("Failed to read stdin: {}", e),
-        _ => {
-            match buf.pop() {
-                None => (),
-                Some(c) =>
-                    if c != '\n' {
-                        buf.push(c)
-                    }
+        _ => match buf.pop() {
+            None => (),
+            Some(c) => {
+                if c != '\n' {
+                    buf.push(c)
+                }
             }
-        }
+        },
     };
     buf
 }

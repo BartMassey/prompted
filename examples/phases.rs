@@ -27,10 +27,8 @@ fn f_post() {
 }
 
 pub fn main() {
-    let phases: &[(usize, &'static str, fn())] = &[
-        (1, "pre", f_pre),
-        (2, "op", f_op),
-        (3, "post", f_post)];
+    let phases: &[(usize, &'static str, fn())] =
+        &[(1, "pre", f_pre), (2, "op", f_op), (3, "post", f_post)];
     let mut last_len = 0;
     for &(n, name, f) in phases {
         for _ in 0..last_len {
