@@ -72,8 +72,7 @@ pub fn read_line() -> String {
 /// # Examples
 ///
 /// ```
-/// # #[macro_use]
-/// # extern crate prompted;
+/// # use prompted::prompt;
 /// # pub fn main() {
 /// prompt!();
 /// prompt!("Pick a number between 1 and {}: ", 10);
@@ -88,16 +87,9 @@ macro_rules! prompt {
 /// Same functionality as `prompt!()` except using `stderr()`
 /// instead of `stdout()`.
 ///
-/// # Examples
+/// # Panics
 ///
-/// ```
-/// # #[macro_use]
-/// # extern crate prompted;
-/// # pub fn main() {
-/// eprompt!();
-/// eprompt!("Pick a number between 1 and {}: ", 10);
-/// # }
-/// ```
+/// Panics if writing to `io::stderr` fails.
 #[macro_export]
 macro_rules! eprompt {
     () => ($crate::eflush());
@@ -108,16 +100,18 @@ macro_rules! eprompt {
 /// on `stdout()` and then flush. Then read a line from
 /// `stdin()` and return it after removing the line ending.
 ///
+/// # Panics
+///
+/// Panics if reading from `io::stdin` or writing to `io::stdout()` fails.
+///
 /// # Examples
 ///
 /// ```
-/// # #[macro_use]
-/// # extern crate prompted;
+/// # use prompted::input;
 /// # pub fn main() {
-/// let mut buf = String::new();
 /// let m = 10;
-/// input!("Pick a number between 1 and {}: ", m);
-/// match buf.parse::<isize>() {
+/// let guess = input!("Pick a number between 1 and {}: ", m);
+/// match guess.parse::<isize>() {
 ///     Ok(n) => if n >=1 && n <= m {
 ///         println!("Thank you for choosing {}", n)
 ///     } else {

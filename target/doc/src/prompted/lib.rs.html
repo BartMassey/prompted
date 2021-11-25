@@ -127,12 +127,6 @@
 <span id="127">127</span>
 <span id="128">128</span>
 <span id="129">129</span>
-<span id="130">130</span>
-<span id="131">131</span>
-<span id="132">132</span>
-<span id="133">133</span>
-<span id="134">134</span>
-<span id="135">135</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright © 2017 Bart Massey</span>
 <span class="comment">// [This program is licensed under the &quot;MIT License&quot;]</span>
 <span class="comment">// Please see the file LICENSE in the source</span>
@@ -207,8 +201,7 @@
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
-<span class="doccomment">/// # #[macro_use]</span>
-<span class="doccomment">/// # extern crate prompted;</span>
+<span class="doccomment">/// # use prompted::prompt;</span>
 <span class="doccomment">/// # pub fn main() {</span>
 <span class="doccomment">/// prompt!();</span>
 <span class="doccomment">/// prompt!(&quot;Pick a number between 1 and {}: &quot;, 10);</span>
@@ -223,16 +216,9 @@
 <span class="doccomment">/// Same functionality as `prompt!()` except using `stderr()`</span>
 <span class="doccomment">/// instead of `stdout()`.</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
+<span class="doccomment">/// # Panics</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// # #[macro_use]</span>
-<span class="doccomment">/// # extern crate prompted;</span>
-<span class="doccomment">/// # pub fn main() {</span>
-<span class="doccomment">/// eprompt!();</span>
-<span class="doccomment">/// eprompt!(&quot;Pick a number between 1 and {}: &quot;, 10);</span>
-<span class="doccomment">/// # }</span>
-<span class="doccomment">/// ```</span>
+<span class="doccomment">/// Panics if writing to `io::stderr` fails.</span>
 <span class="attribute">#[<span class="ident">macro_export</span>]</span>
 <span class="macro">macro_rules!</span> <span class="ident">eprompt</span> {
     () <span class="op">=</span><span class="op">&gt;</span> (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::eflush</span>());
@@ -243,16 +229,18 @@
 <span class="doccomment">/// on `stdout()` and then flush. Then read a line from</span>
 <span class="doccomment">/// `stdin()` and return it after removing the line ending.</span>
 <span class="doccomment">///</span>
+<span class="doccomment">/// # Panics</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Panics if reading from `io::stdin` or writing to `io::stdout()` fails.</span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
-<span class="doccomment">/// # #[macro_use]</span>
-<span class="doccomment">/// # extern crate prompted;</span>
+<span class="doccomment">/// # use prompted::input;</span>
 <span class="doccomment">/// # pub fn main() {</span>
-<span class="doccomment">/// let mut buf = String::new();</span>
 <span class="doccomment">/// let m = 10;</span>
-<span class="doccomment">/// input!(&quot;Pick a number between 1 and {}: &quot;, m);</span>
-<span class="doccomment">/// match buf.parse::&lt;isize&gt;() {</span>
+<span class="doccomment">/// let guess = input!(&quot;Pick a number between 1 and {}: &quot;, m);</span>
+<span class="doccomment">/// match guess.parse::&lt;isize&gt;() {</span>
 <span class="doccomment">///     Ok(n) =&gt; if n &gt;=1 &amp;&amp; n &lt;= m {</span>
 <span class="doccomment">///         println!(&quot;Thank you for choosing {}&quot;, n)</span>
 <span class="doccomment">///     } else {</span>

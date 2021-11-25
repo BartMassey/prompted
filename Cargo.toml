@@ -5,8 +5,9 @@
 
 [package]
 name = "prompted"
-version = "0.1.0"
-authors = ["Bart Massey <bart@cs.pdx.edu>"]
+version = "0.2.0"
+authors = ["Bart Massey <bart.massey@gmail.com>"]
+edition = "2018"
 
 [dev-dependencies]
 rand = "0.3.0"
