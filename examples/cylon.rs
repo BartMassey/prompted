@@ -8,12 +8,11 @@
 //! This is something we used to write in the 1980s to run
 //! on our glass TTYs.
 
-#[macro_use]
-extern crate prompted;
-
 use std::str;
 use std::thread::sleep;
 use std::time::Duration;
+
+use prompted::prompt;
 
 const WIDTH: usize = 7;
 

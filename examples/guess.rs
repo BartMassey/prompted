@@ -4,19 +4,17 @@
 //! Guessing Game from Rust tutorial,
 //! updated to use input!() macro.
 
-extern crate rand;
-
-#[macro_use]
-extern crate prompted;
+use std::cmp::Ordering;
 
 use rand::Rng;
-use std::cmp::Ordering;
+
+use prompted::input;
 
 fn main() {
     println!("Guess the number!");
 
     let n = 100;
-    let secret_number = rand::thread_rng().gen_range(1, n + 1);
+    let secret_number = rand::thread_rng().gen_range(1..=n);
 
     loop {
         let guess = input!("Please input your guess (1-{}): ", n);

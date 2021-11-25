@@ -8,11 +8,10 @@
 //! This demo simulates the display of long-running
 //! process state on a single line.
 
-#[macro_use]
-extern crate prompted;
-
 use std::thread::sleep;
 use std::time::Duration;
+
+use prompted::prompt;
 
 fn f_pre() {
     sleep(Duration::from_millis(1000))
