@@ -6,7 +6,7 @@ Rust standard libraries. It provides macros for printing and
 flushing a non-nl-terminated line, and a macro for prompting
 for a line of input.
 
-It's all very preliminary. See the rustdoc for details.
+It's all very preliminary. See the [rustdoc](target/doc/prompted/index.html) for details.
 
 This program is licensed under the "MIT License".  Please
 see the file LICENSE in the source distribution of this
