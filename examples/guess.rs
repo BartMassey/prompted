@@ -1,5 +1,4 @@
 #![allow(clippy::uninlined_format_args)]
-
 // From <https://doc.rust-lang.org/1.9.0/book/guessing-game.html>,
 // used without permission.
 
