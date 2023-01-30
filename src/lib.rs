@@ -1,3 +1,5 @@
+#![allow(clippy::uninlined_format_args)]
+
 // Copyright © 2017 Bart Massey
 // [This program is licensed under the "MIT License"]
 // Please see the file LICENSE in the source
