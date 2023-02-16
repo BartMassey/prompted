@@ -17,7 +17,7 @@ use std::io::{stderr, stdin, stdout, Write};
 ///
 /// # Panics
 ///
-/// Panics if writing to `io::stdout` fails.
+/// Panics if writing to [stdout] fails.
 pub fn flush() {
     if let Err(e) = stdout().flush() {
         panic!("Failed to flush stdout: {}", e);
@@ -29,7 +29,7 @@ pub fn flush() {
 ///
 /// # Panics
 ///
-/// Panics if writing to `io::stderr` fails.
+/// Panics if writing to [stderr] fails.
 pub fn eflush() {
     if let Err(e) = stderr().flush() {
         panic!("Failed to flush stderr: {}", e);
@@ -42,7 +42,7 @@ pub fn eflush() {
 ///
 /// # Panics
 ///
-/// Panics if reading from `io::stdin` fails.
+/// Panics if reading from [stdin] fails.
 pub fn read_line() -> String {
     let mut buf = String::new();
     match stdin().read_line(&mut buf) {
@@ -59,16 +59,16 @@ pub fn read_line() -> String {
     buf
 }
 
-/// Same functionality as `print!()` except that `stdout()`
+/// Same functionality as [print!()] except that [stdout]
 /// is flushed at the end.
 ///
-/// As with `print!()`, the multi-argument form of this
-/// macro supports the [`format!`] syntax for building a
+/// As with [print!()], the multi-argument form of this
+/// macro supports the [format!()] syntax for building a
 /// string. With no arguments, only the flush is performed.
 ///
 /// # Panics
 ///
-/// Panics if writing to `io::stdout` fails.
+/// Panics if writing to [stdout] fails.
 ///
 /// # Examples
 ///
@@ -85,25 +85,25 @@ macro_rules! prompt {
     ($($arg:tt)*) => ({print!($($arg)*);$crate::flush()});
 }
 
-/// Same functionality as `prompt!()` except using `stderr()`
-/// instead of `stdout()`.
+/// Same functionality as [prompt!()] except using [stderr]
+/// instead of [stdout].
 ///
 /// # Panics
 ///
-/// Panics if writing to `io::stderr` fails.
+/// Panics if writing to [stderr] fails.
 #[macro_export]
 macro_rules! eprompt {
     () => ($crate::eflush());
     ($($arg:tt)*) => ({eprint!($($arg)*);$crate::eflush()});
 }
 
-/// If a `[format!]` describing a prompt is present, print it
-/// on `stdout()` and then flush. Then read a line from
-/// `stdin()` and return it after removing the line ending.
+/// If a [format!()] describing a prompt is present, print it
+/// on [stdout] and then flush. Then read a line from
+/// [stdin] and return it after removing the line ending.
 ///
 /// # Panics
 ///
-/// Panics if reading from `io::stdin` or writing to `io::stdout()` fails.
+/// Panics if reading from [stdin] or writing to [stdout] fails.
 ///
 /// # Examples
 ///
