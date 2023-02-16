@@ -1,4 +1,4 @@
-#![doc(html_root_url = "https://docs.rs/prompted/0.2.4")]
+#![doc(html_root_url = "https://docs.rs/prompted/0.2.5")]
 // Copyright © 2017 Bart Massey
 // [This program is licensed under the "MIT License"]
 // Please see the file LICENSE in the source
