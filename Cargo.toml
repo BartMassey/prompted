@@ -5,11 +5,12 @@
 
 [package]
 name = "prompted"
-version = "0.2.3"
+version = "0.2.4"
 edition = "2021"
 authors = ["Bart Massey <bart.massey@gmail.com>"]
 description = "Macros for input and prompting."
 license = "MIT"
+documentation = "https://docs.rs/prompted"
 homepage = "https://github.com/BartMassey/prompted"
 repository = "https://github.com/BartMassey/prompted"
 keywords = ["input", "prompt"]
