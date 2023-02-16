@@ -1,5 +1,5 @@
 # Prompted: Rust crate for prompting and input
-Copyright © 2017 Bart Massey — Version 0.2.1
+Copyright © 2017 Bart Massey — Version 0.2.2
 
 ![Maintenance](https://img.shields.io/badge/maintenance-actively--develo
 ped-brightgreen.svg)
