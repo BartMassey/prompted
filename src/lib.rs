@@ -1,4 +1,4 @@
-#![doc(html_root_url = "https://docs.rs/prompted/0.2.6")]
+#![doc(html_root_url = "https://docs.rs/prompted/0.2.7")]
 // Copyright © 2017 Bart Massey
 // [This program is licensed under the "MIT License"]
 // Please see the file LICENSE in the source
@@ -47,14 +47,14 @@ pub fn read_line() -> String {
     let mut buf = String::new();
     match stdin().read_line(&mut buf) {
         Err(e) => panic!("Failed to read stdin: {}", e),
-        _ => match buf.pop() {
-            None => (),
-            Some(c) => {
+        _ => {
+            while let Some(c) = buf.pop() {
                 if c != '\r' && c != '\n' {
-                    buf.push(c)
+                    buf.push(c);
+                    break;
                 }
             }
-        },
+        }
     };
     buf
 }
