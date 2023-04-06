@@ -1,4 +1,4 @@
-#![doc(html_root_url = "https://docs.rs/prompted/0.2.5")]
+#![doc(html_root_url = "https://docs.rs/prompted/0.2.6")]
 // Copyright © 2017 Bart Massey
 // [This program is licensed under the "MIT License"]
 // Please see the file LICENSE in the source
@@ -50,7 +50,7 @@ pub fn read_line() -> String {
         _ => match buf.pop() {
             None => (),
             Some(c) => {
-                if c != '\n' {
+                if c != '\r' && c != '\n' {
                     buf.push(c)
                 }
             }
