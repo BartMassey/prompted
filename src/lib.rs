@@ -1,14 +1,54 @@
-#![doc(html_root_url = "https://docs.rs/prompted/0.2.7")]
+#![doc(html_root_url = "https://docs.rs/prompted/0.2.8")]
 // Copyright © 2017 Bart Massey
 // [This program is licensed under the "MIT License"]
 // Please see the file LICENSE in the source
 // distribution of this software for license terms.
 
-//! Prompting macros.
-//!
-//! These are eventually intended to go into the standard
-//! library macros. At that point, parts of them will need
-//! to be reimplented for efficiency and compatibility.
+/*!
+This crate provides macros for easy non-newline-terminated
+flushed printing, and for input line reading. These macros
+are intended for new Rust users and for folks who need no
+more for simple applications.
+
+# Example
+
+Here's an example adapted from the "Guessing Game" example
+in [*The Rust Programming
+Language*](https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html).
+
+```no_run
+use std::cmp::Ordering;
+use prompted::input;
+
+fn main() {
+    println!("Guess the number!");
+
+    let n = 100;
+    let secret_number = 37;
+
+    loop {
+        let guess = input!("Please input your guess (1-{}): ", n);
+
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,
+        };
+
+        println!("You guessed: {}", guess);
+
+        match guess.cmp(&secret_number) {
+            Ordering::Less => println!("Too small!"),
+            Ordering::Greater => println!("Too big!"),
+            Ordering::Equal => {
+                println!("You win!");
+                break;
+            }
+        }
+    }
+}
+```
+
+*/
 
 use std::io::{stderr, stdin, stdout, Write};
 
