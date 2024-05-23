@@ -6,7 +6,7 @@
 
 use std::cmp::Ordering;
 
-use prompted::input;
+use prompted::inputln;
 
 fn main() {
     println!("Guess the number!");
@@ -15,7 +15,7 @@ fn main() {
     let secret_number = 37;
 
     loop {
-        let guess = input!("Please input your guess (1-{}): ", n);
+        let guess = inputln!("Please input your guess (1-{}): ", n);
 
         let guess: u32 = match guess.trim().parse() {
             Ok(num) => num,

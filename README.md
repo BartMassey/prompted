@@ -5,7 +5,7 @@
 [![dependency-status](https://deps.rs/repo/github/BartMassey/prompted/status.svg)](https://deps.rs/repo/github/BartMassey/prompted)
 
 # prompted: simple prompting and input
-Copyright © Bart Massey 2017 (Version 0.2.8)
+Copyright © Bart Massey 2017 (Version 0.3.0-pre)
 
 This crate provides macros for easy non-newline-terminated
 flushed printing, and for input line reading. These macros
@@ -20,7 +20,7 @@ Language*](https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html).
 
 ```rust
 use std::cmp::Ordering;
-use prompted::input;
+use prompted::inputln;
 
 fn main() {
     println!("Guess the number!");
@@ -29,7 +29,7 @@ fn main() {
     let secret_number = 37;
 
     loop {
-        let guess = input!("Please input your guess (1-{}): ", n);
+        let guess = inputln!("Please input your guess (1-{}): ", n);
 
         let guess: u32 = match guess.trim().parse() {
             Ok(num) => num,

@@ -5,7 +5,7 @@
 
 [package]
 name = "prompted"
-version = "0.2.8"
+version = "0.3.0-pre"
 edition = "2021"
 authors = ["Bart Massey <bart.massey@gmail.com>"]
 description = "Macros for input and prompting."
@@ -18,7 +18,7 @@ categories = ["command-line-interface"]
 
 [dev-dependencies]
 rand = "0.8.5"
-version-sync = "0.9.4"
+version-sync = "0.9.5"
 
 [badges.maintenance]
 status = "actively-developed"
