@@ -179,9 +179,10 @@ macro_rules! eprompt {
     }};
 }
 
-/// Write to the writer given as the first argument.  The
+/// Write to the writer given as the first argument, which must
+/// implement [std::io::Write].  The
 /// writer is flushed after a successful write. Returns
-/// [std::io::Result(())].
+/// [std::io::Result]`<()>`.
 ///
 /// As with [print!()], the multi-argument form of this
 /// macro supports the [format!()] syntax for building a
