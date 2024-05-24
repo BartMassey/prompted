@@ -16,6 +16,11 @@ in production work.
 # Motivation
 [motivation]: #motivation
 
+A common task in CLI programs is to read a line of user
+text.  This interaction is extremely common in tutorials,
+demos and examples. However, it also is quite common in
+production tools.
+
 In most programming languages, simple and ergonomic support
 is provided for reading a line of standard input from the
 user. Support is also usually provided for printing a prompt
